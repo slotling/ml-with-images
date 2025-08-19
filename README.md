@@ -9,7 +9,19 @@ These trials all returned a model that performed badly on the validation set (40
 - LR adjustments [0.001 and 0.01] (no change)
 - LR schedulers [cosine, cosine with repeats, exponential decay] (no change)
 
+None of which surpassed more than 40% val acc
+
 ### Approaching 60% val acc
+Searching the right hyperparameters in the following:
+- Data augmentation layers [cutout/mixup/cutmix]
+- Batch normalization
+- Dropout layers
+- Global average pooling
+- Label smoothing
+- Focal loss
+- Other LR schedules [ReduceLROnPlateu]
+
+Utilizing Hyperband tuning
 
 
 ### Transfer learning
