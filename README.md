@@ -41,3 +41,11 @@ The model reached
 
 ### Transfer learning
 Part of the challenge was to develop a model from scratch that could predict the images, but in practice, a pre-trained model could adapt to this dataset (along with numerous others) much better.
+
+### Reflection
+Key takeaways:
+- Data augmentation is useful
+- Transfer learning is very very very useful
+
+Things that I figured would be helpful but I only thought about them after training models:
+- Class oversampling in model from scratch (FER-2013 has imbalanced classes so oversampling the minority class would improve performance aside from just using label smoothing)
