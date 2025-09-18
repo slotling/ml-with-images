@@ -1,6 +1,11 @@
 # Emotion recognition model (FER-2013)
 The following is the summary of the training and experimentation process across more than 5 notebooks (2 of which are present in this repository)
 
+## Basic iterative process
+1. Check if pipeline works
+2. Quickly train a bunch of models to pick the most performant one (Modify architecture, then use Hyperband tuning for hyperparameter search)
+3. Final training and evaluation
+
 ## Experiment process
 ### <= 40% validation accuracy
 The first trials all returned a model that performed badly on the validation set:
@@ -29,7 +34,7 @@ Searching the right hyperparameters in the following:
 - Loss functions [crossentropy/focal loss/label smoothing]
 - Other LR schedules [ReduceLROnPlateau]
 
-After a search, the model reached the following hyperparameters:
+After a search, the tuner reached the following hyperparameters:
 - Spatial dropout: `0.04`
 - Dense dropout: `0.58`
 - Loss function: `tf.keras.losses.CategoricalCrossentropy()`
@@ -44,8 +49,16 @@ Using the parameters above and these additional features:
 - Longer training (100 epochs)
 The model finally reached 52% accuracy
 
-### Transfer learning
+## Transfer learning
 Part of the challenge was to develop a model from scratch that could predict the images, but in practice, a pre-trained model could adapt to this dataset (along with numerous others) much better.
+
+### Standard model
+The ResNet50 backbone is chosen at a baseline. The head is global average pooling and some dense layers.
+
+After 50 epochs, the accuracy on a subset of data is 24.3%.
+
+### subheading here
+
 
 ### Reflection
 Key takeaways:
@@ -54,3 +67,4 @@ Key takeaways:
 
 Things that I figured would be helpful but I only thought about them after training models:
 - Class oversampling in model from scratch (FER-2013 has imbalanced classes so oversampling the minority class would improve performance aside from just using label smoothing)
+- Use `model.evaluate()` to evaluate models, don't use the stats from the last epoch.
