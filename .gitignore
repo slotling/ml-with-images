@@ -1,3 +1,4 @@
 emotion_data/
 .venv/
-training/
+training/flatten_resnet/
+training/last_block_resnet/
